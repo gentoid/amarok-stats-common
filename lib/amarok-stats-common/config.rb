@@ -1,3 +1,5 @@
+require 'yaml'
+
 module AmarokStatsCommon
   class Config
 
@@ -8,7 +10,7 @@ module AmarokStatsCommon
 
       def load
         if File.exists? filename
-          File.read filename
+          YAML.load_file filename
         else
           {}
         end

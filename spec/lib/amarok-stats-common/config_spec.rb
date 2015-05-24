@@ -10,27 +10,37 @@ module AmarokStatsCommon
     end
 
     describe '.load' do
+      let(:described_method) { described_class.load }
+
       context "when file doesn't exist" do
         before :each do
           allow(File).to receive(:exists?).with(described_class.filename).and_return(false)
         end
 
         it 'returns empty Hash' do
-          expect(described_class.load).to be_eql({})
+          expect(described_method).to be_eql({})
         end
       end
 
-      # todo: need clear way to load valid/not-valid data from real files in `spec/`
       context 'when file exists' do
+        let(:filename) { 'spec/fake_data/config.yml' }
+
         before :each do
           allow(described_class).to receive(:filename).and_return(filename)
         end
 
-        context 'and contains valid YAML data' do
-          let(:filename) { 'spec/fake_data/config.yml' }
+        it "loads the file returned by '.filename'" do
+          expect(YAML).to receive(:load_file).with(filename)
+          described_method
+        end
 
-          it "reads the file returned by '.filename'" do
-            expect(described_class.load).to be_eql({})
+        context 'and contains valid YAML data' do
+          it 'returns Hash' do
+            expect(described_method).to be_a(Hash)
+          end
+
+          it 'returns non-empty Hash' do
+            expect(described_method).to_not be(:empty?)
           end
         end
       end
