@@ -10,7 +10,7 @@ module AmarokStatsCommon
     end
 
     describe '.load' do
-      context "file doesn't exist" do
+      context "when file doesn't exist" do
         before :each do
           allow(File).to receive(:exists?).with(described_class.filename).and_return(false)
         end
@@ -21,7 +21,7 @@ module AmarokStatsCommon
       end
 
       # todo: need clear way to load valid/not-valid data from real files in `spec/`
-      context 'file exists' do
+      context 'when file exists' do
         before :each do
           allow(described_class).to receive(:filename).and_return(filename)
         end
