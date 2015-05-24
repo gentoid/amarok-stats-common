@@ -42,6 +42,21 @@ module AmarokStatsCommon
           it 'returns non-empty Hash' do
             expect(described_method).to_not be(:empty?)
           end
+
+          def deep_keys_symbolized?(hash)
+            result = true
+
+            hash.each do |key, value|
+              break result = false unless key.is_a?(Symbol)
+              result = deep_keys_symbolized?(value) if value.is_a?(Hash)
+            end
+
+            result
+          end
+
+          it 'returns Hash with symbolized keys' do
+            expect(deep_keys_symbolized?(described_method)).to be(true)
+          end
         end
       end
     end

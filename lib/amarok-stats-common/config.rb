@@ -1,4 +1,5 @@
 require 'yaml'
+require 'facets/hash/deep_rekey'
 
 module AmarokStatsCommon
   class Config
@@ -9,8 +10,8 @@ module AmarokStatsCommon
       end
 
       def load
-        if File.exists? filename
-          YAML.load_file filename
+        if File.exists? filename and (hash = YAML.load_file(filename))
+          hash.deep_rekey
         else
           {}
         end
