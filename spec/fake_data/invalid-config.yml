@@ -1,0 +1,8 @@
+amarok:
+  database: text
+   username: test
+  password: test
+amarok_stats:
+  database: text
+  username: test
+  pa ssword: test

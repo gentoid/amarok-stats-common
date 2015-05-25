@@ -30,7 +30,7 @@ module AmarokStatsCommon
         end
 
         it "loads the file returned by '.filename'" do
-          expect(YAML).to receive(:load_file).with(filename)
+          expect(YAML).to receive(:load_file).with(filename).and_return({})
           described_method
         end
 
@@ -56,6 +56,14 @@ module AmarokStatsCommon
 
           it 'returns Hash with symbolized keys' do
             expect(deep_keys_symbolized?(described_method)).to be(true)
+          end
+        end
+
+        context 'and contains non-valid YAML data' do
+          let(:filename) { 'spec/fake_data/invalid-config.yml' }
+
+          it 'raises error' do
+            expect {described_method}.to raise_error(described_class::NotValidConfig)
           end
         end
       end
