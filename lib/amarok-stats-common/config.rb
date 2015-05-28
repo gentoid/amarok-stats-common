@@ -2,8 +2,8 @@ require 'yaml'
 require 'facets/hash/deep_rekey'
 
 module AmarokStatsCommon
-  class Config
 
+  class Config
     class NotValidConfig < StandardError; end
 
     class << self
@@ -12,7 +12,7 @@ module AmarokStatsCommon
       end
 
       def load
-        if File.exists? filename
+        if File.exist? filename
           begin
             YAML.load_file(filename).deep_rekey
           rescue Psych::SyntaxError
@@ -23,6 +23,6 @@ module AmarokStatsCommon
         end
       end
     end
-
   end
+
 end

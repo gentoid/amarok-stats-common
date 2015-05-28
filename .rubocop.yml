@@ -1,0 +1,12 @@
+Metrics/LineLength:
+  Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+
+Style/EmptyLinesAroundModuleBody:
+    EnforcedStyle: empty_lines
+
+Style/PredicateName:
+  Enabled: false

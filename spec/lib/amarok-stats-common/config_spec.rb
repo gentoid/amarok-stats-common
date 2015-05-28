@@ -63,7 +63,7 @@ module AmarokStatsCommon
           let(:filename) { 'spec/fake_data/invalid-config.yml' }
 
           it 'raises error' do
-            expect {described_method}.to raise_error(described_class::NotValidConfig)
+            expect { described_method }.to raise_error(described_class::NotValidConfig)
           end
         end
       end
