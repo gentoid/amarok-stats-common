@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
 
   s.files       = `git ls-files -- lib/*`.split("\n") + %w(LICENSE README.md)
 
-  s.add_development_dependency 'rspec'
   s.add_development_dependency 'facets'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rubocop'
 end
