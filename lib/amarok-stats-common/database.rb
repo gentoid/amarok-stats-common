@@ -5,6 +5,31 @@ module AmarokDataCommon
   class Database
     attr_accessor :database, :username, :password
 
+    class << self
+
+      def amarok_db
+        by_key :amarok
+      end
+
+      def stats_db
+        by_key :amarok_stats
+      end
+
+      private
+
+      def by_key(key)
+        config = Config.load[key]
+
+        db = self.new
+        db.database = config[:database]
+        db.username = config[:username]
+        db.password = config[:password]
+
+        db
+      end
+
+    end
+
     def connect_to_db
       @connect_to_db ||= Mysql2::Client.new host: host, database: database, username: username, password: password
     rescue Mysql2::Error
@@ -12,7 +37,7 @@ module AmarokDataCommon
     end
 
     def connect_to_dbms
-      @connect_to_dbms ||= Mysql2::Client.new host: :localhost, username: username, password: password
+      @connect_to_dbms ||= Mysql2::Client.new host: host, username: username, password: password
     rescue Mysql2::Error
       nil
     end
@@ -36,7 +61,7 @@ module AmarokDataCommon
     end
 
     def to_config
-      [:host, :database, :username, :password].each_with_object({}) { |memo, p| memo[p] = send(p); memo }
+      [:database, :username, :password].each_with_object({}) { |memo, p| memo[p] = send(p); memo }
     end
   end
 
