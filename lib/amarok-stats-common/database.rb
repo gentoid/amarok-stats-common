@@ -1,6 +1,6 @@
 require 'mysql2'
 
-module AmarokDataCommon
+module AmarokStatsCommon
 
   class Database
     attr_accessor :database, :username, :password
