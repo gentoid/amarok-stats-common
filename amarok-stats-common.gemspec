@@ -14,7 +14,8 @@ Gem::Specification.new do |s|
 
   s.files       = `git ls-files -- lib/*`.split("\n") + %w(LICENSE README.md)
 
-  s.add_development_dependency 'facets'
+  s.add_runtime_dependency 'facets'
+  s.add_runtime_dependency 'mysql2'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rubocop'
 end
