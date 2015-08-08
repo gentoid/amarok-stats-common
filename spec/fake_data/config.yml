@@ -1,8 +1,8 @@
 amarok:
-  database: text
+  database: test
   username: test
   password: test
 amarok_stats:
-  database: text
+  database: test
   username: test
   password: test
