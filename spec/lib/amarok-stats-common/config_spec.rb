@@ -14,7 +14,7 @@ module AmarokStatsCommon
 
       context "when file doesn't exist" do
         before :each do
-          allow(File).to receive(:exists?).with(described_class.config_file).and_return(false)
+          allow(File).to receive(:exist?).with(described_class.config_file).and_return(false)
         end
 
         it 'returns empty Hash' do
