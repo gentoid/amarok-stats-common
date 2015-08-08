@@ -3,9 +3,9 @@ require 'amarok-stats-common/config'
 module AmarokStatsCommon
 
   describe Config do
-    describe '.filename' do
+    describe '.config_file' do
       it 'returns string' do
-        expect(described_class.filename).to be_a(String)
+        expect(described_class.config_file).to be_a(String)
       end
     end
 
@@ -14,7 +14,7 @@ module AmarokStatsCommon
 
       context "when file doesn't exist" do
         before :each do
-          allow(File).to receive(:exists?).with(described_class.filename).and_return(false)
+          allow(File).to receive(:exists?).with(described_class.config_file).and_return(false)
         end
 
         it 'returns empty Hash' do
@@ -23,14 +23,14 @@ module AmarokStatsCommon
       end
 
       context 'when file exists' do
-        let(:filename) { 'spec/fake_data/config.yml' }
+        let(:config_file) { 'spec/fake_data/config.yml' }
 
         before :each do
-          allow(described_class).to receive(:filename).and_return(filename)
+          allow(described_class).to receive(:config_file).and_return(config_file)
         end
 
-        it "loads the file returned by '.filename'" do
-          expect(YAML).to receive(:load_file).with(filename).and_return({})
+        it "loads the file returned by '.config_file'" do
+          expect(YAML).to receive(:load_file).with(config_file).and_return({})
           described_method
         end
 
@@ -60,7 +60,7 @@ module AmarokStatsCommon
         end
 
         context 'and contains non-valid YAML data' do
-          let(:filename) { 'spec/fake_data/invalid-config.yml' }
+          let(:config_file) { 'spec/fake_data/invalid-config.yml' }
 
           it 'raises error' do
             expect { described_method }.to raise_error(described_class::NotValidConfig)
