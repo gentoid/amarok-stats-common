@@ -1,4 +1,5 @@
 require 'mysql2'
+require 'amarok-stats-common/config'
 
 module AmarokStatsCommon
 
