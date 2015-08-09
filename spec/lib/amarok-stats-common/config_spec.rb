@@ -68,6 +68,22 @@ module AmarokStatsCommon
         end
       end
     end
+
+    describe '.create' do
+      context "When config file doesn't exist" do
+        before(:each) do
+          allow(File).to receive(:exist?).with(described_class.config_file).and_return false
+        end
+
+        it 'creates the file' do
+          file = double 'file'
+          allow(File).to receive(:open).with(described_class.config_file, 'w').and_yield file
+          expect(file).to receive(:write)
+
+          described_class.create
+        end
+      end
+    end
   end
 
 end
