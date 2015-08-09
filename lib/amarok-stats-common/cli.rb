@@ -1,6 +1,11 @@
-require 'thor'
+require 'amarok-stats-common/cli/main'
 
 module AmarokStatsCommon
-  class CLI < Thor
+  module CLI
+
+    def self.start(argv)
+      AmarokStatsCommon::CLI::Main.start argv
+    end
+
   end
 end
