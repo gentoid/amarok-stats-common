@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+$:.push File.expand_path File.join __dir__, '..', 'lib'
+
+require 'amarok-stats-common/cli'
+
+AmarokStatsCommon::CLI.start ARGV
